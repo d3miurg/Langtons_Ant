@@ -43,30 +43,9 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    pygame.draw.rect(screen_surface, (r, g, b), (x, y, pixel_size, pixel_size))
-
-    x += pixel_size
-    if x == step:
-        if shift:
-            x = pixel_size
-            r += 255
-            g += 255
-            b += 255
-        else:
-            x = 0
-        y += pixel_size
-        shift = not shift
-
-    if y == step:
-        y = 0
-
-    r += 255
-    g += 255
-    b += 255
-    if r > 256:
-        r = 0
-        g = 0
-        b = 0
+    pygame.draw.rect(screen_surface,
+                     (0, 0, 0),
+                     (0, 0, pixel_size, pixel_size))
 
     pygame.display.flip()
 
