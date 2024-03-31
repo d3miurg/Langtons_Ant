@@ -52,7 +52,9 @@ while running:
 
             if game_matrix[i][j]==255:
                 game_matrix[i][j]=0
+
     game_matrix[5][5]=2
+    
     pygame.display.flip()
 
 pygame.quit()
