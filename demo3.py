@@ -32,6 +32,7 @@ game_matrix= [[0] * game_size for i in range(game_size)]
 
 pos_ant_x=int(game_size/2)
 pos_ant_y=int(game_size/2)
+
 color_ant = [0,0,0]
 
 pygame.init()
