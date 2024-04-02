@@ -90,15 +90,15 @@ while running:
         pos_ant_y=game_size-1
 
     # Поворот на основе цвета и измение цвета предыдущей клетки
-    # Если клетка белая, то поворот влево
-    # Если клетка черная, то поворот вправо
+    # Если клетка черная, то поворот влево
+    # Если клетка белая, то поворот вправо
 
     if game_matrix[pos_ant_y][pos_ant_x]==255:
-        direction-=1
+        direction+=1
         game_matrix[pos_ant_y][pos_ant_x]=0
 
     elif game_matrix[pos_ant_y][pos_ant_x]==0:
-        direction+=1
+        direction-=1
         game_matrix[pos_ant_y][pos_ant_x]=255
 
     if direction==4:
@@ -114,7 +114,7 @@ while running:
     pos = projection((pos_ant_y,pos_ant_x))
 
     pygame.draw.rect(screen_surface,  (color_ant),(pos[0],pos[1],pixel_size,pixel_size))        
-    pygame.time.wait(100)
+    pygame.time.wait(170)
     pygame.display.flip()
 
 pygame.quit()
