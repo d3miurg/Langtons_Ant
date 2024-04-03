@@ -1,7 +1,7 @@
 import pygame
 import sys
 
-screen_size = 100
+screen_size = 1000
 pixel_size = 10
 
 
