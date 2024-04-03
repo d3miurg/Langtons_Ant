@@ -15,32 +15,30 @@ for arg in sys.argv:
     if args[0] == 'pixel-size':
         pixel_size = int(args[1])
 
-step = int(screen_size)
+game_size = int(screen_size / pixel_size)
 scale = int(screen_size / pixel_size)
 
-screen_matrix = [[0]]
-for i in range(0, scale):
-    screen_matrix[0].append(0)
-    screen_matrix.append(screen_matrix[0])
+game_matrix = [[255] * game_size for i in range(game_size)]
 
-pos_x = int(scale / 2)
-pos_y = pos_x
+
+def projection(pixel_position):
+    pos_x = pixel_position[0] * pixel_size
+    pos_y = pixel_position[1] * pixel_size
+    real_position = (pos_x, pos_y)
+    return real_position
+
+
+def move(direction, pos_x, pos_y):
+    pass
+
+
+ant_x = int(game_size / 2)
+ant_y = ant_x
 direction = 'up'
 
 pygame.init()
 
 screen_surface = pygame.display.set_mode([screen_size, screen_size])
-
-
-def to_real_position(position):
-    return position * scale
-
-
-def direction_to_delta(x, y):
-    if direction == 'up':
-        x += 1
-
-
 screen_surface.fill((255, 255, 255))
 
 running = True
@@ -49,14 +47,21 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    pygame.draw.rect(screen_surface,
-                     (0, 0, 0),
-                     (0, 0, pixel_size, pixel_size))
+    if game_matrix[ant_x][ant_y] == 255:
+        game_matrix[ant_x][ant_y] = 0
+    elif game_matrix[ant_x][ant_y] == 0:
+        game_matrix[ant_x][ant_y] = 255
 
-    if screen_matrix[pos_x][pos_y] == 255:
-        screen_matrix[pos_x][pos_y] = 0
-    elif screen_matrix[pos_x][pos_y] == 0:
-        screen_matrix[pos_x][pos_y] = 255
+    move(direction, ant_x, ant_y)
+
+    for i in range(len(game_matrix)):
+        for j in range(len(game_matrix[i])):
+            pos = projection((i, j))
+            pygame.draw.rect(screen_surface,
+                             (game_matrix[i][j],
+                              game_matrix[i][j],
+                              game_matrix[i][j]),
+                             (pos[0], pos[1], pixel_size, pixel_size))
 
     pygame.display.flip()
 
