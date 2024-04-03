@@ -36,5 +36,4 @@ while running:
     if blue == 256:
         blue = 0
 
-
     pygame.display.flip()
